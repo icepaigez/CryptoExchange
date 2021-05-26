@@ -9,7 +9,7 @@ function tokens(qty) {
 	return web3.utils.toWei(qty, "ether");
 }
 
-contract('EthSwap', accounts => {
+contract('EthSwap', accounts => { //accounts refer to the addresses on the blockchain holding the ether
 	let token, ethSwap
 	before(async() => {
 		token = await Token.new()
