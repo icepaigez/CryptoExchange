@@ -13,8 +13,9 @@ contract('EthSwap', accounts => { //accounts refer to the addresses on the block
 	let token, ethSwap
 	before(async() => {
 		token = await Token.new()
-		ethSwap = await EthSwap.new()
+		ethSwap = await EthSwap.new(token.address)
 	})
+	
 	describe('EthSwap Deployment', async () => {
 		it('should have a contract name', async () => {
 			let name = await ethSwap.name()
