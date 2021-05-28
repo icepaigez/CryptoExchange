@@ -52,6 +52,12 @@ contract('EthSwap', ([exchange, investor]) => { //accounts refer to an array of 
 			assert.equal(investorBalance.toString(), tokens('100')) //check that the investor got 100 tokens
 			assert.equal(ethSwapBalance.toString(), tokens('999900'))
 			assert.equal(ethSwapEtherBal.toString(), web3.utils.toWei('1', "ether"))
+
+			const event = transferOp.logs[0].args
+			assert.equal(event.receiver, investor)
+			assert.equal(event.token, token.address)
+			assert.equal(event.amount.toString(), tokens('100').toString())
+			assert.equal(event.rate.toString(), '100')
 		})
 	})
 })
