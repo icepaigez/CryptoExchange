@@ -26,6 +26,9 @@ contract EthSwap {
 
 	//sell tokens back to the exchange i.e. give tokens and get back ether 
 	function sellToken(uint _amount) public {
+		//check that the seller can sell more tokens than they have
+		require(token.balanceOf(msg.sender)  >= _amount);
+
 		uint etherAmount = _amount / rate;
 		//check that the exchange has enough ether to redeem the tokens
 		require(address(this).balance >= etherAmount);
