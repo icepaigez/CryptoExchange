@@ -8,6 +8,7 @@ contract EthSwap {
 	uint public rate = 100; //1 ether => 100 tokens
 
 	event TokenPurchased(address receiver, address token, uint amount, uint rate);
+	event TokenSold(address sender, address token, uint amount, uint rate);
 
 	constructor(Token _token) public { //this is another form of inheriting from the Token contract, and we have to link the Token contract to this contract by passing in the address in the deployment file i.e set arg here and pass in the parameter before deploying to the blockchain
 		token = _token;
@@ -30,5 +31,7 @@ contract EthSwap {
 		msg.sender.transfer(etherAmount); //this transfer is the function on the msg.sender global variable and NOT the transfer function from the ERC-20 token standard
 		//transfer tokens from seller to exchange
 		token.transferFrom(msg.sender, address(this), _amount);
+		//emit an event after a token is sold back to the exchange
+		emit TokenSold(msg.sender, address(token), _amount, rate);
 	}
 }

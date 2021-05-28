@@ -81,6 +81,13 @@ contract('EthSwap', ([exchange, investor]) => { //accounts refer to an array of 
 			//check that the xchange ether balance reduced by 1 ether
 			let ethSwapEtherBal = await web3.eth.getBalance(ethSwap.address)
 			assert.equal(ethSwapEtherBal.toString(), web3.utils.toWei('0', "ether"))
+
+			//test the event emitted after a sale is done
+			const event = result.logs[0].args
+			assert.equal(event.sender, investor)
+			assert.equal(event.token, token.address)
+			assert.equal(event.amount.toString(), tokens('100').toString())
+			assert.equal(event.rate.toString(), '100')
 		})
 	})
 })
