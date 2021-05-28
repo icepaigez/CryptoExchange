@@ -60,6 +60,27 @@ contract('EthSwap', ([exchange, investor]) => { //accounts refer to an array of 
 			assert.equal(event.rate.toString(), '100')
 		})
 	})
+
+	describe('Sell tokens', async () => {
+		let result
+		before(async () => {
+			//according to the ERC-20 token standard, you must call the approve function (on the token itself) before you can call the transferFrom function (which is called inside this sellToken())
+			await token.approve(ethSwap.address, tokens('100'), { from:investor })
+			result = await ethSwap.sellToken(tokens('100'), { from:investor })
+		})
+
+		it('should transfer tokens from the investor back to the ethSwap exchange when sellToken() is called', async () => {
+			//check that tokens leave the investor
+			let investorBalance = await token.balanceOf(investor)
+			assert.equal(investorBalance.toString(), tokens('0')) 
+
+			//check that the exchange got the tokens
+			let ethSwapBalance = await token.balanceOf(ethSwap.address)
+			assert.equal(ethSwapBalance.toString(), tokens('1000000'))
+
+			//check that the xchange ether balance reduced by 1 ether
+			let ethSwapEtherBal = await web3.eth.getBalance(ethSwap.address)
+			assert.equal(ethSwapEtherBal.toString(), web3.utils.toWei('0', "ether"))
+		})
+	})
 })
-
-
