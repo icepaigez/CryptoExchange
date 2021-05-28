@@ -88,6 +88,9 @@ contract('EthSwap', ([exchange, investor]) => { //accounts refer to an array of 
 			assert.equal(event.token, token.address)
 			assert.equal(event.amount.toString(), tokens('100').toString())
 			assert.equal(event.rate.toString(), '100')
+
+			//test to prevent investor from selling more tokens than they have
+			await ethSwap.sellToken(tokens('400'), { from:investor }).should.be.rejected;
 		})
 	})
 })
