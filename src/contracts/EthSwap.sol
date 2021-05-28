@@ -27,6 +27,8 @@ contract EthSwap {
 	//sell tokens back to the exchange i.e. give tokens and get back ether 
 	function sellToken(uint _amount) public {
 		uint etherAmount = _amount / rate;
+		//check that the exchange has enough ether to redeem the tokens
+		require(address(this).balance >= etherAmount);
 		//send ether to the seller
 		msg.sender.transfer(etherAmount); //this transfer is the function on the msg.sender global variable and NOT the transfer function from the ERC-20 token standard
 		//transfer tokens from seller to exchange
