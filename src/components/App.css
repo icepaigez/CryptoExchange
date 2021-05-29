@@ -4,7 +4,7 @@
 	text-align: center;
 }
 
-.wallet__alert span {
+.wallet__alert span a {
 	font-weight: 700;
 	color: green;
 }

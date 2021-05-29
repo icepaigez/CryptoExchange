@@ -1,7 +1,7 @@
 import React from "react";
 import "./header.css";
 
-const Header = () => {
+const Header = ({ walletState }) => {
 	return(
 		 <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow header">
           <a
@@ -12,9 +12,7 @@ const Header = () => {
           >
             Centralized Cryptocurrency Exchange
           </a>
-          <div className="install">
-          	<a href="http://www.binance.com/en" target="_blank" className="install__metamask">Install Wallet</a>
-          </div>
+          { !walletState && <div className="install"><a href="https://metamask.io/download" target="_blank" rel="noopener noreferrer" className="install__metamask">Install Wallet</a></div> }
         </nav>
 	)
 }
