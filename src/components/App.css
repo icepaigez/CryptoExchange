@@ -1,1 +1,10 @@
 /* Styles go here */
+.wallet__alert {
+	margin-top: 3.5em;
+	text-align: center;
+}
+
+.wallet__alert span {
+	font-weight: 700;
+	color: green;
+}

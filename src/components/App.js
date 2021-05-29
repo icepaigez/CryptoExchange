@@ -1,13 +1,37 @@
 import React, { Component } from 'react';
+import Web3 from "web3";
 import Header from "./Header";
-//import logo from '../logo.png';
 import './App.css';
 
 class App extends Component {
+
+  constructor(){
+    super()
+    this.state = {
+      walletInstalled: true
+    }
+  }
+
+  isMetaMaskInstalled = () => {
+    //Have to check the ethereum binding on the window object to see if it's installed
+    const { ethereum } = window;
+    return Boolean(ethereum && ethereum.isMetaMask);
+  };
+
+  componentDidMount() {
+    if (!this.isMetaMaskInstalled()) {
+      this.setState({
+        walletInstalled: false
+      })
+    }
+  }
+
   render() {
+    const { walletInstalled } = this.state;
     return (
       <div>
-       <Header />
+       <Header walletState={walletInstalled}/>
+       <p className="wallet__alert">You need a blockchain wallet to use this DApp. Please click <span>Install Wallet</span> above to get MetaMask!</p>
         {/*<div className="container-fluid mt-5">
           <div className="row">
             <main role="main" className="col-lg-12 d-flex text-center">

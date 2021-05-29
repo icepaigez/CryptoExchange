@@ -1,0 +1,11 @@
+.install {
+	padding-right: 1em;
+}
+
+.install__metamask {
+	color: #fff;
+}
+
+.install__metamask:hover {
+	color: #fff;
+}
