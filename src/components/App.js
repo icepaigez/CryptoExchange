@@ -8,7 +8,7 @@ import './App.css';
 
 class App extends Component {
 
-  constructor(){
+  constructor() {
     super()
     this.state = {
       walletInstalled: true,
@@ -31,7 +31,8 @@ class App extends Component {
     const { ethereum } = window;
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
     const provider = new ethers.providers.Web3Provider(ethereum); //this provides read-only functionality and cannot do any transaction that will change the state of the blockchain
-    const signer = provider.getSigner(); //this will change state in the blockchain when attached to functions defined in the contract
+    //this will change state in the blockchain when attached to functions defined in the contract
+    const signer = provider.getSigner();
     this.setState({
       account: accounts[0]
     })
@@ -63,7 +64,7 @@ class App extends Component {
     const ethSwapInterface = await EthSwap.networks[networkId]
     if (ethSwapInterface) {
       const ethSwapAddress = ethSwapInterface.address;
-      const ethSwap = await new ethers.Contract(ethSwapAddress, ethSwapAbi, provider);
+      const ethSwap = await new ethers.Contract(ethSwapAddress, ethSwapAbi, signer);
       this.setState({ ethSwap })
     } else {
       window.alert("EthSwap contract not deployed to the detected network!")
@@ -74,6 +75,11 @@ class App extends Component {
     })
   }
 
+  buyTokens = ethQty => {
+    const { ethSwap } = this.state;
+    console.log("ethSwap", ethSwap)
+  }
+
   async componentDidMount() {
     if (!this.isMetaMaskInstalled()) {
       this.setState({
@@ -81,6 +87,7 @@ class App extends Component {
       })
     } else {
       await this.loadBlockchainData();
+      this.buyTokens(1)
     }
   }
 

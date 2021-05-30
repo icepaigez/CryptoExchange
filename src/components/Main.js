@@ -4,11 +4,33 @@ import ethLogo from "./eth-logo.png";
 import tokenLogo from "./token-logo.png";
 
 class Main extends Component {
+	constructor() {
+		super()
+		this.state = {
+			tokenQuantity: 0,
+			exchangeRate: 100
+		}
+	}
+
+	doExchange = e => {
+		const { exchangeRate } = this.state
+		let eth2Token = e.target.value * exchangeRate;
+		this.setState({
+			tokenQuantity: eth2Token
+		})
+	}
+
+	makeExchange = e => {
+		e.preventDefault()
+		console.log("submitted")
+	}
+
 	render() {
 		const { ethBalance, tokenBalance } = this.props;
+		const { tokenQuantity, exchangeRate } = this.state;
 		return(
 			<div className="main">
-				<form className="mb-3">
+				<form className="mb-3" onSubmit={this.makeExchange}>
 			        <div>
 			          <label className="float-left"><b>Input</b></label>
 			          <span className="float-right text-muted">
@@ -17,8 +39,8 @@ class Main extends Component {
 			        </div>
 			        <div className="input-group mb-4">
 			          <input
+			          	onChange={this.doExchange}
 			            type="text"
-			            // ref={(input) => { this.input = input }}
 			            className="form-control form-control-lg"
 			            placeholder="0"
 			            required />
@@ -40,7 +62,7 @@ class Main extends Component {
 			            type="text"
 			            className="form-control form-control-lg"
 			            placeholder="0"
-			            value=""
+			            value={tokenQuantity}
 			            disabled
 			          />
 			          <div className="input-group-append">
@@ -52,7 +74,7 @@ class Main extends Component {
 			        </div>
 			        <div className="mb-5">
 			          <span className="float-left text-muted">Exchange Rate</span>
-			          <span className="float-right text-muted">1 ETH = 100 DApp</span>
+			          <span className="float-right text-muted">1 ETH = {exchangeRate} DApp</span>
 			        </div>
 			        <button type="submit" className="btn btn-primary btn-block btn-lg">SWAP!</button>
 		      </form>
