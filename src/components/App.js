@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { ethers } from "ethers";
+import EthSwap from "../abis/EthSwap.json";
+import Token from "../abis/Token.json";
 import Navbar from "./Navbar";
 import './App.css';
 
@@ -9,7 +11,10 @@ class App extends Component {
     super()
     this.state = {
       walletInstalled: true,
-      account:""
+      account:"",
+      ethBalance: 0,
+      token: {},
+      tokenBalance: 0
     }
   }
 
@@ -22,12 +27,31 @@ class App extends Component {
   loadBlockchainData = async () => {
     const { ethereum } = window;
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-    const provider = new ethers.providers.Web3Provider(ethereum);
+    const provider = new ethers.providers.Web3Provider(ethereum); //this provides read-only functionality and cannot do any transaction that will change the state of the blockchain
+    const signer = provider.getSigner(); //this will change state in the blockchain when attached to functions defined in the contract
     this.setState({
       account: accounts[0]
     })
     let hexBalance = await provider.getBalance(this.state.account)
     let ethBalance = await ethers.utils.formatEther(hexBalance)
+    this.setState({ ethBalance })
+
+    //import the token and ethswap contracts and create a javascript version, so that the
+    //frontend can interact with it
+    const networkId = await ethereum.request({ method: 'net_version' });
+    const tokenAbi = Token.abi;
+    const addressInterface = await Token.networks[networkId]
+    if (addressInterface) {
+      const tokenAddress = addressInterface.address;
+      const token = await new ethers.Contract(tokenAddress, tokenAbi, provider)
+      this.setState({ token });
+      let tokenBalance = await token.balanceOf(this.state.account)
+      this.setState({
+        tokenBalance: tokenBalance.toString()
+      })
+    } else {
+      window.alert("Token contract not deployed to the detected network!")
+    }
   }
 
   async componentDidMount() {
