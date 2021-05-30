@@ -14,6 +14,7 @@ class App extends Component {
       account:"",
       ethBalance: 0,
       token: {},
+      ethSwap: {},
       tokenBalance: 0
     }
   }
@@ -38,6 +39,8 @@ class App extends Component {
 
     //import the token and ethswap contracts and create a javascript version, so that the
     //frontend can interact with it
+
+    //Token Contract
     const networkId = await ethereum.request({ method: 'net_version' });
     const tokenAbi = Token.abi;
     const addressInterface = await Token.networks[networkId]
@@ -51,6 +54,15 @@ class App extends Component {
       })
     } else {
       window.alert("Token contract not deployed to the detected network!")
+    }
+
+    //Ethswap Contract
+    const ethSwapAbi = EthSwap.abi;
+    const ethSwapInterface = await EthSwap.networks[networkId]
+    if (ethSwapInterface) {
+      const ethSwapAddress = ethSwapInterface.address;
+      const ethSwap = await new ethers.Contract(ethSwapAddress, ethSwapAbi, provider);
+      this.setState({ ethSwap })
     }
   }
 
