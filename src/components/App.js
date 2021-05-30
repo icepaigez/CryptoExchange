@@ -90,7 +90,7 @@ class App extends Component {
       <div>
        <Navbar walletState={walletInstalled} account={account}/>
        { !walletInstalled && <p className="wallet__alert">You need a blockchain wallet to use this DApp. Please click <span><a href="https://metamask.io/download" target="_blank" rel="noopener noreferrer">Install Wallet</a></span> above to get MetaMask!</p> }
-       <div className="contents">{ loadingBlockchainData ? <h1>Loading...</h1> : <Main /> }</div>
+       <div className="contents">{ loadingBlockchainData ? <h4>Loading...</h4> : <Main /> }</div>
       </div>
     );
   }
