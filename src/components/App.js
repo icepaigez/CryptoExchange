@@ -17,7 +17,8 @@ class App extends Component {
       token: {},
       ethSwap: {},
       tokenBalance: 0,
-      loadingBlockchainData: true
+      loadingBlockchainData: true,
+      buying: true
     }
   }
 
@@ -29,7 +30,7 @@ class App extends Component {
 
   loadBlockchainData = async () => {
     const { ethereum } = window;
-    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    let accounts = await ethereum.request({ method: 'eth_requestAccounts' });
     const provider = new ethers.providers.Web3Provider(ethereum); //this provides read-only functionality and cannot do any transaction that will change the state of the blockchain
     //this will change state in the blockchain when attached to functions defined in the contract
     const signer = provider.getSigner();
@@ -37,7 +38,7 @@ class App extends Component {
       account: accounts[0]
     })
     let hexBalance = await provider.getBalance(this.state.account)
-    let ethBalance = await ethers.utils.formatEther(hexBalance)
+    let ethBalance = await ethers.utils.formatEther(hexBalance) //converts hexadecimal format of balance to ether format
     this.setState({ ethBalance })
 
     //import the token and ethswap contracts and create a javascript version, so that the
@@ -49,11 +50,12 @@ class App extends Component {
     const addressInterface = await Token.networks[networkId]
     if (addressInterface) {
       const tokenAddress = addressInterface.address;
-      const token = await new ethers.Contract(tokenAddress, tokenAbi, provider)
+      let token = await new ethers.Contract(tokenAddress, tokenAbi, provider)
       this.setState({ token });
       let tokenBalance = await token.balanceOf(this.state.account)
+      let tokenBalEthFormat = ethers.utils.formatEther(tokenBalance.toString()) //tokenBalance.toString() is in wei format
       this.setState({
-        tokenBalance: tokenBalance.toString()
+        tokenBalance: tokenBalEthFormat
       })
     } else {
       window.alert("Token contract not deployed to the detected network!")
@@ -75,9 +77,14 @@ class App extends Component {
     })
   }
 
-  buyTokens = ethQty => {
-    const { ethSwap } = this.state;
-    console.log("ethSwap", ethSwap)
+  buyTokens = async ethQty => {
+    const { ethSwap, account } = this.state;
+    let txData = await ethSwap.buyToken({ from: account, value: ethQty }) //buyToken does not accept any arguments [check the contract], so this object is a default requirement
+    if (txData) {
+      this.setState({
+        buying: false
+      })
+    }
   }
 
   async componentDidMount() {
@@ -87,7 +94,6 @@ class App extends Component {
       })
     } else {
       await this.loadBlockchainData();
-      this.buyTokens(1)
     }
   }
 
@@ -97,7 +103,7 @@ class App extends Component {
       <div>
        <Navbar walletState={walletInstalled} account={account}/>
        { !walletInstalled && <p className="wallet__alert">You need a blockchain wallet to use this DApp. Please click <span><a href="https://metamask.io/download" target="_blank" rel="noopener noreferrer">Install Wallet</a></span> above to get MetaMask!</p> }
-       <div className="contents">{ loadingBlockchainData ? <h4>Loading...</h4> : <Main ethBalance={ethBalance} tokenBalance={tokenBalance}/> }</div>
+       <div className="contents">{ loadingBlockchainData ? <h4>Loading...</h4> : <Main ethBalance={ethBalance} tokenBalance={tokenBalance} buytoken={this.buyTokens}/> }</div>
       </div>
     );
   }

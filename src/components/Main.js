@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { ethers } from "ethers";
 import "./main.css";
 import ethLogo from "./eth-logo.png";
 import tokenLogo from "./token-logo.png";
@@ -20,9 +21,12 @@ class Main extends Component {
 		})
 	}
 
-	makeExchange = e => {
+	makeExchange = async e => {
 		e.preventDefault()
-		console.log("submitted")
+		const { tokenQuantity, exchangeRate } = this.state;
+		let ethQty = String(tokenQuantity / exchangeRate);
+		let ethQtyWei = await ethers.utils.parseEther(ethQty).toString()
+		this.props.buytoken(ethQtyWei);
 	}
 
 	render() {
