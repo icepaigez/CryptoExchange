@@ -49,7 +49,7 @@ class App extends Component {
     const addressInterface = await Token.networks[networkId]
     if (addressInterface) {
       const tokenAddress = addressInterface.address;
-      let token = await new ethers.Contract(tokenAddress, tokenAbi, provider)
+      let token = await new ethers.Contract(tokenAddress, tokenAbi, signer)
       this.setState({ token });
       let tokenBalance = await token.balanceOf(this.state.account)
       let tokenBalEthFormat = ethers.utils.formatEther(tokenBalance.toString()) //tokenBalance.toString() is in wei format
@@ -84,6 +84,15 @@ class App extends Component {
     }
   }
 
+  sellTokens = async tokenQty => {
+    const { token, ethSwap, account } = this.state;
+    await token.approve(ethSwap.address, tokenQty, { from: account })
+    let txData = await ethSwap.sellToken(tokenQty, { from: account })
+    if (txData) {
+      window.location.reload();
+    }
+  }
+
   async componentDidMount() {
     if (!this.isMetaMaskInstalled()) {
       this.setState({
@@ -100,7 +109,7 @@ class App extends Component {
       <div>
        <Navbar walletState={walletInstalled} account={account}/>
        { !walletInstalled && <p className="wallet__alert">You need a blockchain wallet to use this DApp. Please click <span><a href="https://metamask.io/download" target="_blank" rel="noopener noreferrer">Install Wallet</a></span> above to get MetaMask!</p> }
-       <div className="contents">{ loadingBlockchainData ? <h4>Loading...</h4> : <Main ethBalance={ethBalance} tokenBalance={tokenBalance} buytoken={this.buyTokens}/> }</div>
+       <div className="contents">{ loadingBlockchainData ? <h4>Loading...</h4> : <Main ethBalance={ethBalance} tokenBalance={tokenBalance} buytoken={this.buyTokens} sellToken={this.sellTokens}/> }</div>
       </div>
     );
   }

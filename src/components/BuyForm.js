@@ -27,7 +27,7 @@ class BuyForm extends Component {
 		let ethQtyWei = await ethers.utils.parseEther(ethQty).toString()
 		this.props.buytoken(ethQtyWei);
 	}
-
+ 
 	render() {
 		const { ethBalance, tokenBalance } = this.props;
 		const { tokenQuantity, exchangeRate } = this.state;

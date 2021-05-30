@@ -11,13 +11,30 @@ class Main extends Component {
 			formState: "buy"
 		}
 	}
+
+	buyOption = () => {
+		this.setState({
+			formState: "buy"
+		})
+	}
+
+	sellOption = () => {
+		this.setState({
+			formState: "sell"
+		})
+	}
 	
 	render() {
-		const { ethBalance, tokenBalance, buytoken } = this.props;
+		const { ethBalance, tokenBalance, buytoken, sellToken } = this.props;
 		const { formState } = this.state;
 		return(
 			<div className="main">
-		      { formState === "buy" ? <BuyForm ethBalance={ethBalance} tokenBalance={tokenBalance} buytoken={buytoken}/> : <SellForm /> }
+				<div className="d-flex justify-content-between mb-3">
+				  <button onClick={this.buyOption} className="btn btn-light">Buy</button>
+				  {/*<span className="text-muted">&lt; &nbsp; &gt;</span>*/}
+				  <button onClick={this.sellOption} className="btn btn-light">Sell</button>
+				</div>
+		      { formState === "buy" ? <BuyForm ethBalance={ethBalance} tokenBalance={tokenBalance} buytoken={buytoken}/> : <SellForm sellToken={sellToken} ethBalance={ethBalance} tokenBalance={tokenBalance}/> }
 	      	</div>
 		)
 	}
