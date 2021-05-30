@@ -63,6 +63,8 @@ class App extends Component {
       const ethSwapAddress = ethSwapInterface.address;
       const ethSwap = await new ethers.Contract(ethSwapAddress, ethSwapAbi, provider);
       this.setState({ ethSwap })
+    } else {
+      window.alert("EthSwap contract not deployed to the detected network!")
     }
   }
 
