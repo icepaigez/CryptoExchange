@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import EthSwap from "../abis/EthSwap.json";
 import Token from "../abis/Token.json";
 import Navbar from "./Navbar";
+import Main from "./Main";
 import './App.css';
 
 class App extends Component {
@@ -15,7 +16,8 @@ class App extends Component {
       ethBalance: 0,
       token: {},
       ethSwap: {},
-      tokenBalance: 0
+      tokenBalance: 0,
+      loadingBlockchainData: true
     }
   }
 
@@ -66,6 +68,10 @@ class App extends Component {
     } else {
       window.alert("EthSwap contract not deployed to the detected network!")
     }
+
+    this.setState({
+      loadingBlockchainData: false
+    })
   }
 
   async componentDidMount() {
@@ -79,11 +85,12 @@ class App extends Component {
   }
 
   render() {
-    const { walletInstalled, account } = this.state;
+    const { walletInstalled, account, loadingBlockchainData } = this.state;
     return (
       <div>
        <Navbar walletState={walletInstalled} account={account}/>
        { !walletInstalled && <p className="wallet__alert">You need a blockchain wallet to use this DApp. Please click <span><a href="https://metamask.io/download" target="_blank" rel="noopener noreferrer">Install Wallet</a></span> above to get MetaMask!</p> }
+       <div className="contents">{ loadingBlockchainData ? <h1>Loading...</h1> : <Main /> }</div>
       </div>
     );
   }
