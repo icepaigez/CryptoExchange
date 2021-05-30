@@ -18,7 +18,6 @@ class App extends Component {
       ethSwap: {},
       tokenBalance: 0,
       loadingBlockchainData: true,
-      buying: true
     }
   }
 
@@ -79,11 +78,9 @@ class App extends Component {
 
   buyTokens = async ethQty => {
     const { ethSwap, account } = this.state;
-    let txData = await ethSwap.buyToken({ from: account, value: ethQty }) //buyToken does not accept any arguments [check the contract], so this object is a default requirement
+    let txData = await ethSwap.buyToken({ from: account, value: ethQty }) //buyToken does not have any defined arguments [check the contract], so this object is a default requirement
     if (txData) {
-      this.setState({
-        buying: false
-      })
+      window.location.reload();
     }
   }
 
