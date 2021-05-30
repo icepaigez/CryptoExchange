@@ -14,3 +14,7 @@
 .install__metamask:hover {
 	color: #fff;
 }
+
+.wallet__address span {
+	margin: 0 3px;
+}
