@@ -5,13 +5,14 @@ import tokenLogo from "./token-logo.png";
 
 class Main extends Component {
 	render() {
+		const { ethBalance, tokenBalance } = this.props;
 		return(
 			<div className="main">
 				<form className="mb-3">
 			        <div>
 			          <label className="float-left"><b>Input</b></label>
 			          <span className="float-right text-muted">
-			            Balance: 0
+			            Balance: {ethBalance}
 			          </span>
 			        </div>
 			        <div className="input-group mb-4">
@@ -31,7 +32,7 @@ class Main extends Component {
 			        <div>
 			          <label className="float-left"><b>Output</b></label>
 			          <span className="float-right text-muted">
-			            Balance: 0
+			            Balance: {tokenBalance}
 			          </span>
 			        </div>
 			        <div className="input-group mb-2">

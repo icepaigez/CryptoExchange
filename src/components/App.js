@@ -85,12 +85,12 @@ class App extends Component {
   }
 
   render() {
-    const { walletInstalled, account, loadingBlockchainData } = this.state;
+    const { walletInstalled, account, loadingBlockchainData, ethBalance, tokenBalance } = this.state;
     return (
       <div>
        <Navbar walletState={walletInstalled} account={account}/>
        { !walletInstalled && <p className="wallet__alert">You need a blockchain wallet to use this DApp. Please click <span><a href="https://metamask.io/download" target="_blank" rel="noopener noreferrer">Install Wallet</a></span> above to get MetaMask!</p> }
-       <div className="contents">{ loadingBlockchainData ? <h4>Loading...</h4> : <Main /> }</div>
+       <div className="contents">{ loadingBlockchainData ? <h4>Loading...</h4> : <Main ethBalance={ethBalance} tokenBalance={tokenBalance}/> }</div>
       </div>
     );
   }
