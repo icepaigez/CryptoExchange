@@ -1,7 +1,7 @@
 import React from "react";
 import "./header.css";
 
-const Header = ({ walletState, account }) => {
+const Navbar = ({ walletState, account }) => {
 	return(
 		 <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow header">
           <a
@@ -17,4 +17,4 @@ const Header = ({ walletState, account }) => {
 	)
 }
 
-export default Header;
+export default Navbar;
