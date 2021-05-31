@@ -11,10 +11,10 @@
 * [Inspiration](#inspiration)
 * [Contact](#contact)
 
-## General info
+## General Info
 This is my first project in learning Fullstack Blockchain Development. This DApp is an exchange that runs on a local blockchain and allows users that have test Ether (ETH) to trade (buy and sell) the exchange's token (the DApp token). It is powered by 2 smart contracts: EthSwap - the contract of the exchange that defines the functions for buying & selling tokens AND Token - a contract that describes the requirements of the ERC-20 standard for issuing fungible tokens on the Ethereum Blockchain. 
 
-## Screenshots
+## Screenshot
 ![Example screenshot](./img/screenshot.png)
 
 ## Technologies
@@ -36,9 +36,9 @@ To setup this project (on a Windows machine):
 	a. Click the MetaMask browser extension    
 	b. Click the Networks tab and select Custom RPC  
 	c. Enter settings:   
-		i.   Network Name => Ganache  
-		ii.  New RPC URL (the RPC server on your running Ganache) => http://localhost:7545  
-		iii. Chain ID => 1337 [Explanation](https://ethereum.stackexchange.com/questions/91072/setup-ganache-with-metamask-what-and-where-is-a-chain-id)
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.   Network Name => Ganache  
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ii.  New RPC URL (the RPC server on your running Ganache) => http://localhost:7545  
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iii. Chain ID => 1337 [Explanation](https://ethereum.stackexchange.com/questions/91072/setup-ganache-with-metamask-what-and-where-is-a-chain-id)
 	d. Click Save  
 4. Select the newly added Ganache network and click the profile picture to reveal more settings
 5. Select "Import Account"
