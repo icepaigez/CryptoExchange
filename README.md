@@ -33,13 +33,13 @@ To setup this project (on a Windows machine):
 1. Install the above technologies (Truffle, Ganache, Metamask)
 2. Make Sure Ganache is running (Ganache is the local blockchain)
 3. Connect your MetaMask wallet to Ganache:
-	a. Click the MetaMask browser extension
-	b. Click the Networks tab and select Custom RPC
-	c. Enter settings: 
-		i.   Network Name => Ganache
-		ii.  New RPC URL (the RPC server on your running Ganache) => http://localhost:7545
+	a. Click the MetaMask browser extension  
+	b. Click the Networks tab and select Custom RPC  
+	c. Enter settings:   
+		i.   Network Name => Ganache  
+		ii.  New RPC URL (the RPC server on your running Ganache) => http://localhost:7545  
 		iii. Chain ID => 1337 [Explanation](https://ethereum.stackexchange.com/questions/91072/setup-ganache-with-metamask-what-and-where-is-a-chain-id)
-	d. Click Save
+	d. Click Save  
 4. Select the newly added Ganache network and click the profile picture to reveal more settings
 5. Select "Import Account"
 6. Go to Ganache:
