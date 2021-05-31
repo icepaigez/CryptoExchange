@@ -74,4 +74,4 @@ Project is: _in progress_, more features being developed.
 Project inspired by [@DappUniversity](https://twitter.com/DappUniversity), based on [this tutorial](https://www.youtube.com/watch?v=99pYGpTWcXM&t=1584s)
 
 ## Contact
-Created by [@icepaigez](https://twitter.com/icepaigez) - feel free to contact me!
+Created by [@shocotee](https://twitter.com/shocotee) - feel free to contact me!
