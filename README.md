@@ -32,8 +32,8 @@ This is my first project in learning Fullstack Blockchain Development. This DApp
 To setup this project (on a Windows machine):
 1. Install the above technologies (Truffle, Ganache, Metamask)
 2. Make Sure Ganache is running (Ganache is the local blockchain)
-3. Connect your MetaMask wallet to Ganache:
-	a. Click the MetaMask browser extension  
+3. Connect your MetaMask wallet to Ganache:  
+	a. Click the MetaMask browser extension    
 	b. Click the Networks tab and select Custom RPC  
 	c. Enter settings:   
 		i.   Network Name => Ganache  
@@ -49,11 +49,11 @@ To setup this project (on a Windows machine):
 
 ## Setup
 <!-- Show examples of usage: -->
-To run this project, install it locally using npm:
-`git clone https://github.com/icepaigez/CryptoExchange.git project-name`
-`cd project-name`
-`npm install`
-`truffle migrate`
+To run this project, install it locally using npm:  
+`git clone https://github.com/icepaigez/CryptoExchange.git project-name`  
+`cd project-name`  
+`npm install`   
+`truffle migrate`  
 `npm start`
 
 ## Features
