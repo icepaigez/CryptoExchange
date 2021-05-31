@@ -42,9 +42,9 @@ To setup this project (on a Windows machine):
 	d. Click Save  
 4. Select the newly added Ganache network and click the profile picture to reveal more settings
 5. Select "Import Account"
-6. Go to Ganache:
-	i.  Click the key icon on the first address(Important!) (Ganache provides you with 10 accounts each prefunded with test Ether)
-	ii. Copy the private key
+6. Go to Ganache:  
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.  Click the key icon on the first address(Important!) (Ganache provides you with 10 accounts each prefunded with test Ether)  
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ii. Copy the private key
 7. Go back to MetaMask, make sure the "Private Key" option is selected, paste the private key you copied and click import.
 
 ## Setup
