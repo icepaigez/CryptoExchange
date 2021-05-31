@@ -15,7 +15,7 @@
 This is my first project in learning Fullstack Blockchain Development. This DApp is an exchange that runs on a local blockchain and allows users that have test Ether (ETH) to trade (buy and sell) the exchange's token (the DApp token). It is powered by 2 smart contracts: EthSwap - the contract of the exchange that defines the functions for buying & selling tokens AND Token - a contract that describes the requirements of the ERC-20 standard for issuing fungible tokens on the Ethereum Blockchain. 
 
 ## Screenshot
-![Example screenshot](./img/screenshot.png)
+![Example screenshot](./img/screenshot.gif)
 
 ## Technologies
 * [Solidity](https://docs.soliditylang.org/en/v0.8.4/) - v0.5.0
